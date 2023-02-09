@@ -1,0 +1,77 @@
+<div class="flex flex-col items-center gap-3">
+  <div class="image">
+    <img
+      [src]="images[currentPage]"
+      class="w-96 h-96 rounded-3xl object-cover"
+    />
+  </div>
+
+  <nav aria-label="Page navigation example">
+    <ul class="inline-flex items-center -space-x-px">
+      <li>
+        <div
+          class="cursor-pointer px-3 py-2 ml-0 leading-tight border rounded-l-lg bg-gray-800 border-gray-700 text-gray-400 hover:bg-gray-700"
+          [appClass]="{
+            'text-gray-700 cursor-not-allowed hover:bg-gray-800':
+              currentPage === 0
+          }"
+          (click)="currentPage > 0 && (currentPage = currentPage - 1)"
+        >
+          <span class="sr-only">Previous</span>
+          <svg
+            aria-hidden="true"
+            class="w-5 h-5"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+        </div>
+      </li>
+      <!-- Render paginations -->
+      <ng-container *appTimes="images.length; let i = index">
+        <li *ngIf="checkIndex(i)">
+          <a
+            class="cursor-pointer px-3 py-2 leading-tight border bg-gray-800 border-gray-700 text-gray-400 hover:bg-gray-700"
+            [appClass]="{'bg-gray-600 dark:text-white hover:bg-gray-600': currentPage === i}"
+            (click)="currentPage = i"
+          >
+            {{ i + 1 }}
+          </a>
+        </li>
+      </ng-container>
+      <li>
+        <div
+          class="cursor-pointer px-3 py-2 leading-tight border rounded-r-lg bg-gray-800 border-gray-700 text-gray-400 hover:bg-gray-700"
+          [appClass]="{
+            'text-gray-700 cursor-not-allowed hover:bg-gray-800':
+              currentPage === images.length - 1
+          }"
+          (click)="
+            currentPage < images.length - 1 && (currentPage = currentPage + 1)
+          "
+        >
+          <span class="sr-only">Next</span>
+          <svg
+            aria-hidden="true"
+            class="w-5 h-5"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+        </div>
+      </li>
+    </ul>
+  </nav>
+</div>
